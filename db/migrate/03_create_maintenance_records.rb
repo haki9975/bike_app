@@ -5,6 +5,7 @@ class CreateMaintenanceRecords < ActiveRecord::Migration[5.0]
             t.string :date
             t.integer :cost
             t.string :notes
+            t.integer :bike_id
         end
     end
 end
