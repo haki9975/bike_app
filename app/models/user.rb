@@ -3,3 +3,4 @@ class User < ActiveRecord::Base
     has_many :maintenance_records, through: :bikes 
 
 end
+
