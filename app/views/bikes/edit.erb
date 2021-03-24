@@ -1,0 +1,9 @@
+<form action="/bikes/<%= @bikes.id %>" method="POST">
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="text" name="bikes[name]" value="<%= @bikes.name %>" placeholder="Name"><br><br>
+    <input type="text" name="bikes[description]" value="<%= @bikes.description %>" placeholder="description"><br><br>
+    <input type="text" name="bikes[serial_number]" value="<%= @bikes.serial_number %>" placeholder="Serial Number"><br><br>
+    <textarea type="text" name="bikes[maintenance_records]" value="<%= @bikes.maintenance_records %>" placeholder="Maintenance Records"></textarea><br><br>
+    <input type="text" name="bikes[user_id]" value="<%= @bikes.user_id %>" placeholder="User ID"><br><br>
+    <input type="submit" value="Update Record">
+</form>
