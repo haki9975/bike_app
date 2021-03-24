@@ -4,7 +4,7 @@
  <p> <%= @mrecords.notes %> </p><br>
  <p> <%= @mrecords.bike_id %> </p><br>
 
-<form action="/maintenance_records/<%= @mrecords.id %>" method="POST">
+<form action= "/maintenance_records/<%=@mrecords.id%>" method="POST">
     <input type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete Record">
 </form> 
