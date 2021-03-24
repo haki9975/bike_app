@@ -1,22 +1,22 @@
 class MaintenanceRecordController < ApplicationController
-    #Read all records
+    #Read all records ***this works!***
         get '/maintenance_records/' do
             @mrecords = MaintenanceRecord.all
             erb :'maintenance_records/index'
         end
 
-    #Create new record (render form)
-        get '/maintenance_records/new' do
+    #Create new record (render form) ***This works!*** Add edit button and more paramaters
+        get '/maintenance_records/new/' do
             erb :'maintenance_records/new'
         end
 
-    #Read one record
-        get '/maintenance_records/:id' do
+    #Read one record ***This works!***
+        get '/maintenance_records/:id/' do
             @mrecords = MaintenanceRecord.find_by_id(params[:id])
             erb :'maintenance_records/show'
         end
 
-    #Create new record (save in db)
+    #Create new record (save in db) ***This seems to be working!***
         post '/maintenance_records/' do
            mrecords = MaintenanceRecord.new(name: params["name"])
            if mrecords.save 
@@ -26,8 +26,8 @@ class MaintenanceRecordController < ApplicationController
            end
         end
 
-    #Update one record (render form)
-        get '/maintenance_records/:id/edit/' do
+    #Update one record (render form) ***This is not working***
+        get '/maintenance_records/:id/edit' do
             @mrecords = MaintenanceRecord.find_by_id(params[:id])
             erb :'maintenance_records/edit'
         end
@@ -43,12 +43,12 @@ class MaintenanceRecordController < ApplicationController
 
         end
 
-    #Delete one movie
+    #Delete one movie ***Not working yet***
         delete 'maintenance_records/:id' do
            mrecords = MaintenanceRecord.find_by_id(params[:id])
            mrecords.destroy
 
-           redirect "/maintenance_records"
+           redirect "/maintenance_records/"
         end
 
 end

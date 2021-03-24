@@ -1,4 +1,11 @@
 <form action="/maintenance_records/" method="POST">
-    <input type= "text" name="name" placeholder="name">
+    <!--- <input type= "text" name="name" placeholder="name"> -->
+    <input type="text" name="name" placeholder="Name"><br><br> 
+    <input type="text" name="mrecords[date]" placeholder="MM/DD/YYYY"><br><br>
+    <input type="text" name="mrecords[cost]" placeholder="Cost"><br><br>
+    <textarea type="text" name="mrecords[notes]" placeholder="Notes/Description"></textarea><br><br>
+    <input type="text" name="mrecords[bike_id]" placeholder="Put Bike Name Here"><br><br>
+    
+    
     <input type="submit" value="Create Record">
 </form>
