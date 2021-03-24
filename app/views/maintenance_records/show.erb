@@ -1,0 +1,8 @@
+ <%= @mrecords.name %> 
+
+<form action="/maintenance_records/<%= @mrecords.id %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Record">
+</form> 
+
+

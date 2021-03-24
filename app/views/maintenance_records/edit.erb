@@ -1,0 +1,5 @@
+<form action="/maintenance_records/<%= @mrecords.id %>" method="POST">
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="text" name="name" value="<%= @mrecords.name %>">
+    <input type="submit" value="Update record">
+</form>
