@@ -41,17 +41,17 @@ class MaintenanceRecordController < ApplicationController
             if mrecords.save
                 redirect "/maintenance_records/#{mrecords.id}"
             else
-                redirect "maintenance_records/:id/edit"
+                redirect "/maintenance_records/:id/edit"
             end
 
         end
 
     #Delete one movie ***Not working yet***
-        delete 'maintenance_records/:id' do
+        delete '/maintenance_records/:id' do
            mrecords = MaintenanceRecord.find_by_id(params[:id])
-           binding.pry
-           mrecords.destroy(mrecords.id)
-            if mrecords.save
+           #binding.pry
+           #mrecords.destroy
+            if mrecords.destroy
               redirect "/maintenance_records"
             else
               redirect "/maintenance_records/#{mrecords.id}"
