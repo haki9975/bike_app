@@ -1,9 +1,10 @@
-<h1> <%= @users.name %> </h1> <br><br>
- <p> <%= @users.email %> </p><br>
- <p> <%= @users.password %> </p><br>
- <p> <%= @users.bikes %> </p><br>
- 
-<form action= "/users/<%=@users.id%>" method="POST">
+<h1> <%= @mrecords.name %> </h1> <br><br>
+ <p> <%= @mrecords.date %> </p><br>
+ <p> <%= @mrecords.cost %> </p><br>
+ <p> <%= @mrecords.notes %> </p><br>
+ <p> <%= @mrecords.bike_id %> </p><br>
+
+<form action= "/mrecords/<%=@mrecords.id%>" method="POST">
     <input type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete Account">
 </form> 
