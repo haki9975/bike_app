@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3) do
+ActiveRecord::Schema.define(version: 2021_03_25_190201) do
 
   create_table "bikes", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.string "serial_number"
-    t.string "maintenance_records"
     t.integer "user_id"
+    t.index ["user_id"], name: "index_bikes_on_user_id"
   end
 
   create_table "maintenance_records", force: :cascade do |t|
@@ -26,13 +26,13 @@ ActiveRecord::Schema.define(version: 3) do
     t.integer "cost"
     t.string "notes"
     t.integer "bike_id"
+    t.index ["bike_id"], name: "index_maintenance_records_on_bike_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
-    t.string "bike"
+    t.string "password_digest"
   end
 
 end

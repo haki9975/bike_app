@@ -1,6 +1,6 @@
 class Bike < ActiveRecord::Base
-    belongs_to :user
-    has_many :maintenance_records
+   belongs_to :user
+   has_many :maintenance_records, dependent: :destroy
  # class all method
     # class first method
     # class find/find_by/where (select)

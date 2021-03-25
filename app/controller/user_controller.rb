@@ -1,4 +1,8 @@
 class UserController < ApplicationController
+  #handle signup and editing/ deleting user account
+
+
+
     #Read all records ***this works!***
         get '/user' do
             @user = UserController.all
