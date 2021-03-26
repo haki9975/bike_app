@@ -17,9 +17,9 @@ class MaintenanceRecordController < ApplicationController
 
     get '/maintenance_records/:id' do
         redirect_if_not_logged_in
-
-        redirect_if_not_authorized
-
+        #binding.pry
+        @mrecords = current_user.maintenance_records.find_by_id(params[:id])
+   #     redirect_if_not_authorized
         erb :'maintenance_records/show'
     end
 
@@ -28,6 +28,8 @@ class MaintenanceRecordController < ApplicationController
         redirect_if_not_logged_in
 
         mrecords = MaintenanceRecord.new(params[:mrecords])
+       # binding.pry
+       # if bike.user_id == nil
       #  mrecords.bike_id  = select bike from drop down menu   <<<<<< Need to assign bike id to mrecord
 
         if mrecords.save 
@@ -40,14 +42,14 @@ class MaintenanceRecordController < ApplicationController
 
     get '/maintenance_records/:id/edit' do
         redirect_if_not_logged_in
-        redirect_if_not_authorized
+    #    redirect_if_not_authorized
         erb :'maintenance_records/edit'
     end
 
 
     patch '/maintenance_records/:id' do
         redirect_if_not_logged_in
-        redirect_if_not_authorized
+       # redirect_if_not_authorized not working,
         
         @mrecords.update_attributes(params[:mrecords])
 
@@ -62,7 +64,7 @@ class MaintenanceRecordController < ApplicationController
 
     delete '/maintenance_records/:id' do
         redirect_if_not_logged_in
-        redirect_if_not_authorized
+      #  redirect_if_not_authorized
         @mrecords.destroy
 
         redirect "/maintenance_records"

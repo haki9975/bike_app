@@ -1,5 +1,9 @@
 <ul>
-<% @bikes.each do |b| %>
+<% if @bikes.find { |b| b.user_id == current_user.id } == nil %>
+    <h2>Oops! You haven't created any bikes!</h2>
+<% else %> 
+  <% @bikes.each do |b| %>
     <li><%= b.name %></li>
     <% end %>
+<% end %>
 </ul>

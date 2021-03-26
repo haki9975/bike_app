@@ -2,6 +2,7 @@ class BikeController < ApplicationController
     #Read all records ***this works!***
         get '/bikes' do
             redirect_if_not_logged_in
+            #binding.pry
             @bikes = Bike.all
             erb :'bikes/index'
         end
@@ -23,10 +24,12 @@ class BikeController < ApplicationController
         post '/bikes' do
           redirect_if_not_logged_in
 
-          bikes = Bike.new(params[:bikes])
-          bikes.user_id = session["user_id"]
-           if bikes.save 
-              redirect "/bikes/#{bikes.id}"
+          #bikes = Bike.new(params[:bikes])
+          #bikes.user_id = session["user_id"]
+          #binding.pry
+            bike = current_user.bikes.build(params["bikes"])
+           if bike.save 
+              redirect "/bikes/#{bike.id}"
            else
               redirect "/bikes/new" 
            end
@@ -63,7 +66,7 @@ class BikeController < ApplicationController
 
     private
        def redirect_if_not_authorized
-          @bikes = Bikes.find_by_id(params[:id])
+          @bikes = Bike.find_by_id(params[:id])
           if @bikes.user_id != session["user_id"]
             redirect "/bikes"
           end

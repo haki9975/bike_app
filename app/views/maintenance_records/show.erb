@@ -2,7 +2,7 @@
  <p> <%= @mrecords.date %> </p><br>
  <p> <%= @mrecords.cost %> </p><br>
  <p> <%= @mrecords.notes %> </p><br>
- <p> <%= @mrecords.bike_id %> </p><br>
+ <p> <%= @mrecords.bike.name %> </p><br>
 
 <form action= "/mrecords/<%=@mrecords.id%>" method="POST">
     <input type="hidden" name="_method" value="DELETE">
