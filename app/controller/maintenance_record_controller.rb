@@ -1,61 +1,82 @@
 class MaintenanceRecordController < ApplicationController
-    #Read all records ***this works!***
-        get '/maintenance_records' do
-            @mrecords = MaintenanceRecord.all
-            erb :'maintenance_records/index'
+
+    get '/maintenance_records' do
+        redirect_if_not_logged_in
+
+        @mrecords = current_user.maintenance_records
+
+        erb :'maintenance_records/index'
+    end
+
+ 
+    get '/maintenance_records/new' do
+        redirect_if_not_logged_in
+        erb :'maintenance_records/new'
+    end
+
+
+    get '/maintenance_records/:id' do
+        redirect_if_not_logged_in
+
+        redirect_if_not_authorized
+
+        erb :'maintenance_records/show'
+    end
+
+
+    post '/maintenance_records' do
+        redirect_if_not_logged_in
+
+        mrecords = MaintenanceRecord.new(params[:mrecords])
+      #  mrecords.bike_id  = select bike from drop down menu   <<<<<< Need to assign bike id to mrecord
+
+        if mrecords.save 
+            redirect "/maintenance_records/#{mrecords.id}"
+        else
+            redirect "/maintenance_records/new" 
+        end
+    end
+
+
+    get '/maintenance_records/:id/edit' do
+        redirect_if_not_logged_in
+        redirect_if_not_authorized
+        erb :'maintenance_records/edit'
+    end
+
+
+    patch '/maintenance_records/:id' do
+        redirect_if_not_logged_in
+        redirect_if_not_authorized
+        
+        @mrecords.update_attributes(params[:mrecords])
+
+        if @mrecords.save
+            redirect "/maintenance_records/#{mrecords.id}"
+        else
+            redirect "/maintenance_records/:id/edit"
         end
 
-    #Create new record (render form) ***This works!*** 
-        get '/maintenance_records/new' do
-            erb :'maintenance_records/new'
-        end
+    end
 
-    #Read one record ***This works!***
-        get '/maintenance_records/:id' do
+
+    delete '/maintenance_records/:id' do
+        redirect_if_not_logged_in
+        redirect_if_not_authorized
+        @mrecords.destroy
+
+        redirect "/maintenance_records"
+    end
+
+    private
+    
+        def redirect_if_not_authorized
             @mrecords = MaintenanceRecord.find_by_id(params[:id])
-              erb :'maintenance_records/show'
-        end
-
-    #Create new record (save in db) ***This seems to be working!***
-        post '/maintenance_records' do
-           mrecords = MaintenanceRecord.new(params[:mrecords])
-           if mrecords.save 
-                redirect "/maintenance_records/#{mrecords.id}"
-           else
-                redirect "/maintenance_records/new" 
-           end
-        end
-
-    #Update one record (render form) ***This is working!!!***
-        get '/maintenance_records/:id/edit' do
-            @mrecords = MaintenanceRecord.find_by_id(params[:id])
-             erb :'maintenance_records/edit'
-        end
-
-
-    #Update one record (save in db) ***This is working!!!***
-        patch '/maintenance_records/:id' do
-            mrecords = MaintenanceRecord.find_by_id(params[:id])
-            #binding.pry
-            mrecords.update_attributes(params[:mrecords])
-            if mrecords.save
-                redirect "/maintenance_records/#{mrecords.id}"
-            else
-                redirect "/maintenance_records/:id/edit"
-            end
-
-        end
-
-    #Delete one movie ***Not working yet***
-        delete '/maintenance_records/:id' do
-           mrecords = MaintenanceRecord.find_by_id(params[:id])
-           #binding.pry
-           #mrecords.destroy
-            if mrecords.destroy
-              redirect "/maintenance_records"
-            else
-              redirect "/maintenance_records/#{mrecords.id}"
+            if @mrecords.user_id != session["user_id"]
+                redirect "/bikes"
             end
         end
 
+
+    
 end

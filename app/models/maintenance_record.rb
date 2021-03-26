@@ -1,5 +1,5 @@
 class MaintenanceRecord < ActiveRecord::Base
-    belongs_to :bikes
+    belongs_to :bike
     
 
 end

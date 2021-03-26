@@ -1,9 +1,17 @@
+<ul>
+<h1> <%= @bikes.name %> </h1> <br><br>
+ <p> <%= @bikes.description %> </p><br>
+ <p> <%= @bikes.serial_number %> </p><br>
+</ul>
+ 
+
+
+
 <form action="/bikes/<%= @bikes.id %>" method="POST">
     <input type="hidden" name="_method" value="PATCH">
     <input type="text" name="bikes[name]" value="<%= @bikes.name %>" placeholder="Name"><br><br>
-    <input type="text" name="bikes[description]" value="<%= @bikes.date %>" placeholder="Description"><br><br>
-    <input type="text" name="bikes[serial_number]" value="<%= @bikes.cost %>" placeholder="Serial Number"><br><br>
-    <textarea type="text" name="bikes[maintenance_records]" value="<%= @bikes.notes %>" placeholder="Maintenance Records"></textarea><br><br>
-    <input type="text" name="bikes[user_id]" value="<%= @bikes.bike_id %>" placeholder="User id"><br><br>
+    <input type="text" name="bikes[description]" value="<%= @bikes.description %>" placeholder="Description"><br><br>
+    <input type="text" name="bikes[serial_number]" value="<%= @bikes.serial_number %>" placeholder="Serial Number"><br><br>
+   
     <input type="submit" value="Update Bike">
 </form>
