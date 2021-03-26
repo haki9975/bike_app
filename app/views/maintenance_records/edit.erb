@@ -1,4 +1,4 @@
-<form action="/maintenance_records/<%= @mrecords.id %>" method="POST">
+<form action="/maintenance_records/<%= @mrecords.id %>/edit" method="POST">
     <input type="hidden" name="_method" value="PATCH">
     <input type="text" name="mrecords[name]" value="<%= @mrecords.name %>" placeholder="Name"><br><br>
     <input type="text" name="mrecords[date]" value="<%= @mrecords.date %>" placeholder="date"><br><br>

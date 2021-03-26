@@ -1,5 +1,21 @@
-<ol type="1">
-<% @mrecords.each do |m| %>
-    <li><%= m.name %></li>
+<ul>
+<% if @mrecords == [] %>
+    <h2>Oops! You haven't created any maintenance records!</h2>
+    <a href="/maintenance_records/new">  <button>Create A Record Here!</button> <a>
+<% else %> 
+    <% @mrecords.each do |m| %>
+      <h3><b><%= m.name %></b></h3> 
+      <li><%= m.bike.name %></li>
+      <a href="/maintenance_records/<%=m.id%>"><button>View This Record</button></a>
+      <form action="/maintenance_records/<%= m.id %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Record"> <br><br>
+</form>
+    <% end %>
 <% end %>
-</ol>
+</ul>
+
+
+
+
+ 

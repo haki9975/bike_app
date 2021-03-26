@@ -17,8 +17,8 @@ class MaintenanceRecordController < ApplicationController
 
     get '/maintenance_records/:id' do
         redirect_if_not_logged_in
-        #binding.pry
         @mrecords = current_user.maintenance_records.find_by_id(params[:id])
+        #binding.pry
    #     redirect_if_not_authorized
         erb :'maintenance_records/show'
     end
@@ -40,14 +40,14 @@ class MaintenanceRecordController < ApplicationController
     end
 
 
-    get '/maintenance_records/:id/edit' do
-        redirect_if_not_logged_in
+   # get '/maintenance_records/:id/edit' do
+  #      redirect_if_not_logged_in
     #    redirect_if_not_authorized
-        erb :'maintenance_records/edit'
-    end
+   #     erb :'maintenance_records/edit'
+  #  end
 
 
-    patch '/maintenance_records/:id' do
+    patch '/maintenance_records/:id/edit' do
         redirect_if_not_logged_in
        # redirect_if_not_authorized not working,
         
@@ -56,7 +56,7 @@ class MaintenanceRecordController < ApplicationController
         if @mrecords.save
             redirect "/maintenance_records/#{mrecords.id}"
         else
-            redirect "/maintenance_records/:id/edit"
+            redirect "/maintenance_records/edit"
         end
 
     end
@@ -64,6 +64,7 @@ class MaintenanceRecordController < ApplicationController
 
     delete '/maintenance_records/:id' do
         redirect_if_not_logged_in
+        @mrecords = MaintenanceRecord.find_by_id(params[:id])
       #  redirect_if_not_authorized
         @mrecords.destroy
 
@@ -73,7 +74,7 @@ class MaintenanceRecordController < ApplicationController
     private
     
         def redirect_if_not_authorized
-            @mrecords = MaintenanceRecord.find_by_id(params[:id])
+            @mrecords = MaintenanceRecord.find_by_id(current_user.id)
             if @mrecords.user_id != session["user_id"]
                 redirect "/bikes"
             end

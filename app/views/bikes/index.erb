@@ -1,9 +1,10 @@
 <ul>
-<% if @bikes.find { |b| b.user_id == current_user.id } == nil %>
+<% if @bikes == [] %>
     <h2>Oops! You haven't created any bikes!</h2>
+    <a href="/bikes/new">  <button>Create Your Bike Here!</button> <a>
 <% else %> 
   <% @bikes.each do |b| %>
-    <li><%= b.name %></li>
+    <li><%= b.name %> <a href="/bikes/<%=b.id%>"><button>View This Bike</button></a><br><br> </li>
     <% end %>
 <% end %>
 </ul>

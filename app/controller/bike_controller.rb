@@ -2,8 +2,8 @@ class BikeController < ApplicationController
     #Read all records ***this works!***
         get '/bikes' do
             redirect_if_not_logged_in
+            @bikes = Bike.all.find_all { |b| b.user_id == current_user.id }
             #binding.pry
-            @bikes = Bike.all
             erb :'bikes/index'
         end
 
@@ -57,11 +57,12 @@ class BikeController < ApplicationController
 
         end
 
-    #Delete one movie ***Not working yet***
+    #Delete one bike ***Not working yet***
         delete '/bikes/:id' do
            redirect_if_not_authorized
            redirect_if_not_logged_in
            @bikes.destroy
+           redirect '/bikes'
          end
 
     private

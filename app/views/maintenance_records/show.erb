@@ -1,10 +1,13 @@
 <h1> <%= @mrecords.name %> </h1> <br><br>
- <p> <%= @mrecords.date %> </p><br>
- <p> <%= @mrecords.cost %> </p><br>
- <p> <%= @mrecords.notes %> </p><br>
- <p> <%= @mrecords.bike.name %> </p><br>
-
-<form action= "/mrecords/<%=@mrecords.id%>" method="POST">
+ <p><b>Date Of Service:</b> <%= @mrecords.date %> </p><br>
+ <p><b>Cost of Service:</b><%= @mrecords.cost %> </p><br>
+ <p><b>Description of Service:</b> <%= @mrecords.notes %> </p><br>
+ <p><b>Bike Name:</b> <%= @mrecords.bike.name %> </p><br>
+ <p><b>Bike Serial Number:</b> <%= @mrecords.bike.serial_number %> </p><br>
+ <a href="/maintenance_records/<%= @mrecords.id %>/edit">
+  <input type="submit" value="Edit Record"><br>
+</a>
+<form action= "/maintenance_records/<%=@mrecords.id%>" method="POST">
     <input type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete Record">
 </form> 
