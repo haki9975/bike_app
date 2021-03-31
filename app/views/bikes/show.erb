@@ -1,19 +1,16 @@
 <ul>
 <h1> <%= @bikes.name %> </h1> <br><br>
- <h3> Description:</h3><br><p> <%= @bikes.description %> </p><br>
- <h3> Serial Number:</h3><br><p> <%= @bikes.serial_number %> </p><br>
- 
-</ul>
- 
-
-
+ <b><h3> Description:</h3></b><br><p> <%= @bikes.description %> </p><br>
+ <b><h3> Serial Number:</h3></b><br><p> <%= @bikes.serial_number %> </p><br>
+ </ul>
 
 <a href="/bikes/<%= @bikes.id %>/edit">
   <input type="submit" value="Edit Bike"><br>
 </a>
-<a href="/maintenance_records/:bike_id">
+
+<a href="/maintenance_records?bike_id=<%=@bikes.id%>" > 
  <br> <input type="submit" value="View This Bike's Records">
-</a>
+</a> 
 
 <form action="/bikes/<%= @bikes.id %>" method="POST">
     <input type="hidden" name="_method" value="DELETE"><br>

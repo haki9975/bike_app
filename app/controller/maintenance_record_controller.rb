@@ -2,9 +2,12 @@ class MaintenanceRecordController < ApplicationController
 
     get '/maintenance_records' do
         redirect_if_not_logged_in
-
-        @mrecords = current_user.maintenance_records
-
+        #binding.pry
+        if params[:bike_id]
+            @mrecords = MaintenanceRecord.all.find_all { |m| m.bike_id == params[:bike_id].to_i }
+        else
+          @mrecords = current_user.maintenance_records
+        end
         erb :'maintenance_records/index'
     end
 
@@ -17,21 +20,14 @@ class MaintenanceRecordController < ApplicationController
 
     get '/maintenance_records/:id' do
         redirect_if_not_logged_in
-        @mrecords = current_user.maintenance_records.find_by_id(params[:id])
-        #binding.pry
-   #     redirect_if_not_authorized
+        redirect_if_not_authorized
         erb :'maintenance_records/show'
     end
 
 
     post '/maintenance_records' do
         redirect_if_not_logged_in
-
         mrecords = MaintenanceRecord.new(params[:mrecords])
-       # binding.pry
-       # if bike.user_id == nil
-      #  mrecords.bike_id  = select bike from drop down menu   <<<<<< Need to assign bike id to mrecord
-
         if mrecords.save 
             redirect "/maintenance_records/#{mrecords.id}"
         else
@@ -39,47 +35,39 @@ class MaintenanceRecordController < ApplicationController
         end
     end
 
-
-   # get '/maintenance_records/:id/edit' do
-  #      redirect_if_not_logged_in
-    #    redirect_if_not_authorized
-   #     erb :'maintenance_records/edit'
-  #  end
+    get '/maintenance_records/:id/edit' do
+       redirect_if_not_logged_in
+       redirect_if_not_authorized
+       erb :'maintenance_records/edit'
+   end
 
 
     patch '/maintenance_records/:id/edit' do
         redirect_if_not_logged_in
-       # redirect_if_not_authorized not working,
-        
+        redirect_if_not_authorized 
         @mrecords.update_attributes(params[:mrecords])
-
         if @mrecords.save
-            redirect "/maintenance_records/#{mrecords.id}"
+            redirect "/maintenance_records/#{@mrecords.id}"
         else
-            redirect "/maintenance_records/edit"
+            redirect "/maintenance_records"
         end
-
     end
 
 
     delete '/maintenance_records/:id' do
         redirect_if_not_logged_in
-        @mrecords = MaintenanceRecord.find_by_id(params[:id])
-      #  redirect_if_not_authorized
+        redirect_if_not_authorized
         @mrecords.destroy
-
         redirect "/maintenance_records"
     end
 
-    private
+   private
     
         def redirect_if_not_authorized
-            @mrecords = MaintenanceRecord.find_by_id(current_user.id)
-            if @mrecords.user_id != session["user_id"]
+            @mrecords = MaintenanceRecord.all.find_by_id(params[:id])
+            #binding.pry
+            if @mrecords.bike.user.id != session["user_id"]
                 redirect "/bikes"
             end
-        end
-
-
-    
+        end    
 end

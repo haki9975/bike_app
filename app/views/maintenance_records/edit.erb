@@ -1,9 +1,9 @@
 <form action="/maintenance_records/<%= @mrecords.id %>/edit" method="POST">
     <input type="hidden" name="_method" value="PATCH">
     <input type="text" name="mrecords[name]" value="<%= @mrecords.name %>" placeholder="Name"><br><br>
-    <input type="text" name="mrecords[date]" value="<%= @mrecords.date %>" placeholder="date"><br><br>
-    <input type="text" name="mrecords[cost]" value="<%= @mrecords.cost %>" placeholder="cost"><br><br>
-    <textarea type="text" name="mrecords[notes]" value="<%= @mrecords.notes %>" placeholder="notes"></textarea><br><br>
-    <input type="text" name="mrecords[bike_id]" value="<%= @mrecords.cost %>" placeholder="bike_id"><br><br>
+    <input type="date" name="mrecords[date]" value="<%= @mrecords.date %>" ><br><br>
+    <input type="text" name="mrecords[cost]" value="<%= @mrecords.cost %>" placeholder="Cost"><br><br>
+    <textarea type="text" name="mrecords[notes]" value="<%= @mrecords.notes %>" placeholder="Notes"></textarea><br><br>
+    
     <input type="submit" value="Update Record">
 </form>

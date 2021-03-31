@@ -1,32 +1,23 @@
 class BikeController < ApplicationController
-    #Read all records ***this works!***
         get '/bikes' do
             redirect_if_not_logged_in
             @bikes = Bike.all.find_all { |b| b.user_id == current_user.id }
-            #binding.pry
             erb :'bikes/index'
         end
 
-    #Create new record (render form) ***This works!*** 
         get '/bikes/new' do
             redirect_if_not_logged_in
             erb :'bikes/new'
         end
 
-    #Read one record ***This works!***
         get '/bikes/:id' do
             redirect_if_not_logged_in
             redirect_if_not_authorized
             erb :"bikes/show"
         end
 
-    #Create new record (save in db) ***This seems to be working!***
         post '/bikes' do
           redirect_if_not_logged_in
-
-          #bikes = Bike.new(params[:bikes])
-          #bikes.user_id = session["user_id"]
-          #binding.pry
             bike = current_user.bikes.build(params["bikes"])
            if bike.save 
               redirect "/bikes/#{bike.id}"
@@ -35,19 +26,15 @@ class BikeController < ApplicationController
            end
         end
 
-    #Update one record (render form) ***This is working!!!***
         get '/bikes/:id/edit' do
             redirect_if_not_logged_in
             redirect_if_not_authorized
             erb :'bikes/edit'
         end
 
-
-    #Update one record (save in db) ***This is working!!!***
         patch '/bikes/:id' do
             redirect_if_not_logged_in
             redirect_if_not_authorized
-            #binding.pry
             @bikes.update_attributes(params[:bikes])
             if @bikes.save
                 redirect "/bikes/#{@bikes.id}"
@@ -57,7 +44,6 @@ class BikeController < ApplicationController
 
         end
 
-    #Delete one bike ***Not working yet***
         delete '/bikes/:id' do
            redirect_if_not_authorized
            redirect_if_not_logged_in
@@ -72,5 +58,4 @@ class BikeController < ApplicationController
             redirect "/bikes"
           end
         end
-
 end

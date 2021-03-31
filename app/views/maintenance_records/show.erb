@@ -5,6 +5,7 @@
  <p><b>Bike Name:</b> <%= @mrecords.bike.name %> </p><br>
  <p><b>Bike Serial Number:</b> <%= @mrecords.bike.serial_number %> </p><br>
  <a href="/maintenance_records/<%= @mrecords.id %>/edit">
+ <input type="hidden" name="_method" value="PATCH">
   <input type="submit" value="Edit Record"><br>
 </a>
 <form action= "/maintenance_records/<%=@mrecords.id%>" method="POST">

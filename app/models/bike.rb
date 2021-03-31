@@ -1,6 +1,7 @@
 class Bike < ActiveRecord::Base
    belongs_to :user
    has_many :maintenance_records, dependent: :destroy
+   validates :name, :description, :serial_number, :user_id, presence: true
  # class all method
     # class first method
     # class find/find_by/where (select)

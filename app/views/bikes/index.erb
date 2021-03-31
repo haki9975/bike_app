@@ -4,7 +4,7 @@
     <a href="/bikes/new">  <button>Create Your Bike Here!</button> <a>
 <% else %> 
   <% @bikes.each do |b| %>
-    <li><%= b.name %> <a href="/bikes/<%=b.id%>"><button>View This Bike</button></a><br><br> </li>
+    <li><b><%= b.name %></b> <a href="/bikes/<%=b.id%>"><button>View This Bike</button></a><br><br> </li>
     <% end %>
 <% end %>
 </ul>
