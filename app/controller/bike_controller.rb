@@ -1,7 +1,7 @@
 class BikeController < ApplicationController
         get '/bikes' do
             redirect_if_not_logged_in
-            @bikes = Bike.all.find_all { |b| b.user_id == current_user.id }
+            @bikes = current_user.bikes
             erb :'bikes/index'
         end
 
@@ -22,7 +22,8 @@ class BikeController < ApplicationController
            if bike.save 
               redirect "/bikes/#{bike.id}"
            else
-              redirect "/bikes/new" 
+            @error = "something went wrong"
+            erb :"/bikes/new" 
            end
         end
 

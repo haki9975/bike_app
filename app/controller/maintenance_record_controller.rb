@@ -2,7 +2,6 @@ class MaintenanceRecordController < ApplicationController
 
     get '/maintenance_records' do
         redirect_if_not_logged_in
-        #binding.pry
         if params[:bike_id]
             @mrecords = MaintenanceRecord.all.find_all { |m| m.bike_id == params[:bike_id].to_i }
         else
@@ -65,7 +64,6 @@ class MaintenanceRecordController < ApplicationController
     
         def redirect_if_not_authorized
             @mrecords = MaintenanceRecord.all.find_by_id(params[:id])
-            #binding.pry
             if @mrecords.bike.user.id != session["user_id"]
                 redirect "/bikes"
             end
